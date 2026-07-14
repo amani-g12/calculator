@@ -7,23 +7,21 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        boolean conditionMet = false;
         int operatorNum = 0;
+        double num1;
+        double num2;
+        String userResponse;
 
+
+        do {
+
+        boolean conditionMet = false;
+         double result = 0;
 
         // Check what type of operation
         while (!conditionMet){
-             System.out.print("Which operation would you like to do? Type 1 for Addition, 2 for Subtraction, 3 for Multiplication, and 4 for Division: ");
 
-             // in case user inputs something other than integers
-             try{
-                operatorNum = input.nextInt();
-             }catch(InputMismatchException e){
-                System.out.println("Invalid input! Use numbers only.");
-                input.next();
-                continue;
-             }
-             
+            operatorNum = (int) getNum("Which operation would you like to do? Type 1 for Addition, 2 for Subtraction, 3 for Multiplication, and 4 for Division: ", input);
 
              if (operatorNum > 0 && operatorNum < 5){
                 conditionMet = true;
@@ -33,14 +31,12 @@ public class Main {
 
         }
        
-    
-        System.out.print("Enter first number: ");
-        double num1 = input.nextDouble();
 
-        System.out.print("Enter second number: ");
-        double num2 = input.nextDouble();
+        num1 = getNum("Enter first number: ", input);
+        
+        num2 = getNum("Enter second number: ", input);
 
-        double result;
+        
 
         if (operatorNum == 1){
             result = num1 + num2;
@@ -49,11 +45,40 @@ public class Main {
         }else if (operatorNum == 3){
             result = num1 * num2;
         }else{
-            result = num1/num2;
-        }
+            if (num2 == 0){
+                System.out.println("Cannot divide by zero!");
+            }else{
+                result = num1/num2;
+            }
+            }
+            
 
         System.out.println("Result: " + result);
 
+        System.out.println("Would you like to do another calculation? Input y/n.");
+        userResponse = input.next();
+
+
+    } while(userResponse.equalsIgnoreCase("y"));
+
         input.close();
+
+
+}
+
+    private static double getNum(String prompt, Scanner input){
+        
+
+        while (true){
+            System.out.print(prompt);
+
+        try{
+                return input.nextDouble();
+
+             }catch(InputMismatchException e){
+                System.out.println("Invalid input! Use numbers only.");
+                input.next();
+             }
+            }
     }
 }
