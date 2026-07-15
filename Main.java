@@ -7,21 +7,24 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        int operatorNum = 0;
-        double num1;
-        double num2;
+    
         String userResponse;
 
 
         do {
 
         boolean conditionMet = false;
-         double result = 0;
+        double result = 0;
+        int operatorNum = 0;
+        double num1;
+        double num2;
+
+        System.out.println("--------CALCULATOR--------");
 
         // Check what type of operation
         while (!conditionMet){
 
-            operatorNum = (int) getNum("Which operation would you like to do? Type 1 for Addition, 2 for Subtraction, 3 for Multiplication, and 4 for Division: ", input);
+            operatorNum = getInt("Which operation would you like to do? \n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division", input);
 
              if (operatorNum > 0 && operatorNum < 5){
                 conditionMet = true;
@@ -55,7 +58,7 @@ public class Main {
 
         System.out.println("Result: " + result);
 
-        System.out.println("Would you like to do another calculation? Input y/n.");
+        System.out.print("Would you like to do another calculation? Input y/n.");
         userResponse = input.next();
 
 
@@ -81,4 +84,24 @@ public class Main {
              }
             }
     }
+
+    private static int getInt(String prompt, Scanner input){
+
+        while (true){
+            System.out.println(prompt);
+
+        try{
+                return input.nextInt();
+
+             }catch(InputMismatchException e){
+                System.out.println("Invalid input! Please enter a whole number.");
+                input.next();
+             }
+            }
+
+    }
+
+
+
+
 }
